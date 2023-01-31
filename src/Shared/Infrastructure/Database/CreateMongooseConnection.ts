@@ -24,6 +24,7 @@ import TokenSchema from '../../../Auth/Infrastructure/Schemas/TokenMongoose';
 import ICreateConnection from './ICreateConnection';
 import FileMongooseDocument from '../../../File/Infrastructure/Schemas/FileMongooseDocument';
 import FileSchema from '../../../File/Infrastructure/Schemas/FileMongoose';
+import CategorySchema from '../../../Category/Infraestructure/Schemas/CategoryMongoose';
 
 export let connection: mongoose.Connection | null = null;
 
@@ -74,6 +75,8 @@ class CreateMongooseConnection implements ICreateConnection
         connection.model<ItemMongooseDocument>('Item', ItemSchema);
         connection.model<FileVersionMongooseDocument>('FileVersion', FileVersionSchema);
         connection.model<FileMongooseDocument>('File', FileSchema);
+        connection.model<FileMongooseDocument>('Category', CategorySchema);
+
 
         // Infrastructure
         const NotificationModel = connection.model<NotificationMongooseDocument>('Notification', NotificationSchema);

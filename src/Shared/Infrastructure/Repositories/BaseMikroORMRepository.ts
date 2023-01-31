@@ -86,6 +86,20 @@ abstract class BaseMikroORMRepository<T extends object> implements IBaseReposito
         return entities;
     }
 
+    async getAll(options: IByOptions = { initThrow: false, populate: [] }): Promise<T[]>
+    {
+        const { initThrow, populate } = options;
+        const entities = await this.repository.find({ populate } as any);
+
+
+        if (options?.initThrow && entities.length === 0)
+        {
+            throw new NotFoundException(this.entityName);
+        }
+
+        return entities;
+    }
+
     async getInBy(condition: Record<string, string[]>): Promise<T[]>
     {
         const queryBuilder = this.em.createQueryBuilder<T>(this.entityName, 'i');

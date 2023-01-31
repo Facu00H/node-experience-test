@@ -40,6 +40,14 @@ class Permissions
     static readonly ROLES_LIST: string = 'rolesList';
     static readonly ROLES_DELETE: string = 'rolesDelete';
 
+    // PRODUCTS
+    static readonly PRODUCTS_LIST: string = 'productsList';
+    static readonly PRODUCTS_SAVE: string = 'productsSave';
+
+    // CATEGORIES
+
+    static readonly CATEGORIES_SAVE: string = 'categoriesSave';
+
     static groupPermissions(): IGroupPermission[]
     {
         return [
@@ -92,6 +100,19 @@ class Permissions
                     Permissions.ROLES_SHOW,
                     Permissions.ROLES_LIST,
                     Permissions.ROLES_DELETE
+                ]
+            },
+            {
+                group: 'PRODUCTS',
+                permissions: [
+                    Permissions.PRODUCTS_SAVE,
+                    Permissions.PRODUCTS_LIST
+                ]
+            },
+            {
+                group: 'CATEGORIES',
+                permissions: [
+                    Permissions.CATEGORIES_SAVE
                 ]
             },
             {

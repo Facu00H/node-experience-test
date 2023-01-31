@@ -79,6 +79,20 @@ abstract class BaseTypeORMRepository<T extends ObjectLiteral> implements IBaseRe
         return entities;
     }
 
+    async getAll(options: IByOptions = { initThrow: false }): Promise<T[]>
+    {
+        const { initThrow } = options;
+
+        const entities = await this.repository.find();
+
+        if (initThrow && entities.length === 0)
+        {
+            throw new NotFoundException(this.entityName);
+        }
+
+        return entities;
+    }
+
     async getInBy(condition: Record<string, string[]>): Promise<T[]>
     {
         const [key] = Object.keys(condition);

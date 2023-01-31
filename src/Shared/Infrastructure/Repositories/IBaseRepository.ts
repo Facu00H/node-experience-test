@@ -7,6 +7,7 @@ interface IBaseRepository<T>
     getOne(id: string): Promise<T>;
     delete(id: string): Promise<T>;
     getBy(condition: Record<string, any>, options: IByOptions): Promise<T[]>;
+    getAll(options: IByOptions): Promise<T[]>;
 
     getOneBy(condition: Record<string, any>, options: IByOptions): Promise<T | null>;
     getInBy(condition: Record<string, string[]>): Promise<T[]>;

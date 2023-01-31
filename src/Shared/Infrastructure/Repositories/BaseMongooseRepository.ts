@@ -76,6 +76,18 @@ abstract class BaseMongooseRepository<T extends IBaseDomain, D extends Document 
         return entities;
     }
 
+    async getAll(options: IByOptions = { initThrow: false, populate: undefined }): Promise<T[]>
+    {
+        const entities = await this.repository.find().populate(options?.populate as string | string[]).exec();
+
+        if (options?.initThrow && entities.length === 0)
+        {
+            throw new NotFoundException(this.entityName);
+        }
+
+        return entities;
+    }
+
     async getInBy(condition: Record<string, string[]>): Promise<T[]>
     {
         const [key] = Object.keys(condition);
